@@ -1,0 +1,92 @@
+# =========================
+# macOS
+# =========================
+.DS_Store
+
+# =========================
+# Xcode User / Workspace
+# =========================
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+
+# Xcode legacy user state
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+# =========================
+# Build Artifacts
+# =========================
+DerivedData/
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcarchive
+
+# =========================
+# Swift Package Manager
+# =========================
+.build/
+Packages/
+
+# =========================
+# CocoaPods
+# =========================
+Pods/
+
+# =========================
+# Carthage
+# =========================
+Carthage/Build/
+
+# =========================
+# Fastlane
+# =========================
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# =========================
+# Logs / Temp
+# =========================
+*.log
+*.tmp
+*.swp
+
+# =========================
+# Secrets / Local Config
+# =========================
+.env
+.env.local
+.env.*.local
+
+# Firebase / Google config
+GoogleService-Info.plist
+
+# Apple API Keys / Certificates / Provisioning
+*.p8
+*.p12
+*.cer
+*.mobileprovision
+
+# =========================
+# Optional tools
+# =========================
+# Danger
+danger_output.md
+
+# Tuist
+**/Derived/
+.Tuist-Repos/
+
+# Mint
+.mint/
