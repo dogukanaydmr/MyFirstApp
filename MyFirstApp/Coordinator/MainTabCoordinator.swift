@@ -22,8 +22,7 @@ final class MainTabCoordinator: Coordinator {
 private extension MainTabCoordinator {
     
     func showMain() {
-        let viewModel = HomeViewModel()
-        let viewController = HomeViewController(viewModel: viewModel)
-        navigationController.setViewControllers([viewController], animated: false)
+        let tabBarController = MainTabBarController()
+        navigationController.setViewControllers([tabBarController], animated: false)
     }
 }

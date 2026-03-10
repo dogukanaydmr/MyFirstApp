@@ -11,7 +11,7 @@ protocol SplashViewControllerDelegate: AnyObject {
     func splashViewController(_ controller: SplashViewController, didDetermine route: SplashRoute)
 }
 
-final class SplashViewController: UIViewController {
+final class SplashViewController: BaseViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -45,7 +45,6 @@ final class SplashViewController: UIViewController {
 private extension SplashViewController {
     
     func setupUI() {
-        view.backgroundColor = .systemBackground
         view.addSubview(titleLabel)
 
         NSLayoutConstraint.activate([

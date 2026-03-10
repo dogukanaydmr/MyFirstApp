@@ -11,7 +11,7 @@ protocol LoginViewControllerDelegate: AnyObject {
     func loginViewControllerDidCompleteLogin(_ controller: LoginViewController)
 }
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: BaseViewController {
     
     private lazy var accountTextField: MyTextField = {
         let textField = MyTextField()
@@ -59,14 +59,14 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupKeyboardDismiss()
+        enableKeyboardDismissOnTap()
     }
 }
 
 private extension LoginViewController {
     
     func setupUI() {
-        view.backgroundColor = .white
+        title = "Friends"
         view.addSubview(textFieldStack)
         view.addSubview(loginButton)
         
@@ -79,16 +79,6 @@ private extension LoginViewController {
             loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24)
         ])
-    }
-    
-    func setupKeyboardDismiss() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
     
     @objc func didTapLogin() {
