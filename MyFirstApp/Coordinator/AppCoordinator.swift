@@ -9,11 +9,13 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
 
-    var navigationController: UINavigationController
+    private let window: UIWindow
     private var childCoordinators: [Coordinator] = []
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    private var authNavigationController = UINavigationController()
+
+    init(window: UIWindow) {
+        self.window = window
     }
 
     func start() {
@@ -31,19 +33,21 @@ private extension AppCoordinator {
         let viewModel = SplashViewModel()
         let viewController = SplashViewController(viewModel: viewModel)
         viewController.delegate = self
-        
-        navigationController.setViewControllers([viewController], animated: false)
+
+        authNavigationController.setViewControllers([viewController], animated: false)
+        window.rootViewController = authNavigationController
     }
     
     func startAuthCoordinator() {
-        let authCoordinator = AuthCoordinator(navigationController: navigationController)
+        let authCoordinator = AuthCoordinator(navigationController: authNavigationController)
         authCoordinator.delegate = self
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }
     
     func startMainTabCoordinator() {
-        let mainTabCoordinator = MainTabCoordinator(navigationController: navigationController)
+        let mainTabCoordinator = MainTabCoordinator()
+        mainTabCoordinator.delegate = self
         childCoordinators.append(mainTabCoordinator)
         mainTabCoordinator.start()
     }
@@ -61,9 +65,15 @@ extension AppCoordinator: SplashViewControllerDelegate {
 }
 
 extension AppCoordinator: AuthCoordinatorDelegate {
-    
     func authCoordinatorDidFinishLogin(_ coordinator: AuthCoordinator) {
         removeChild(coordinator)
         startMainTabCoordinator()
+    }
+}
+
+extension AppCoordinator: MainTabCoordinatorDelegate {
+    func mainTabCoordinatorDidFinishSetup(_ coordinator: MainTabCoordinator, tabBarController: UITabBarController) {
+        window.rootViewController = tabBarController
+        removeChild(coordinator)
     }
 }
